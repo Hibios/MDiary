@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include "Diary/app_header.html" %}
+    <title>{% block title %}{{ event.event_title }}{% endblock %}</title>
+</head>
+<body>
+{% include "Diary/navbar.html" %}
+<div id="content">
+  <div id="event_container">
+    <div id="event_content" style="width: 60%;">
+        <div class="event_title_box" style="width: 162%;">
+            <a href="{{ event.get_absolute_url }}" style="text-decoration: none;"><h1 class="event_title">{{ event.event_title }}</h1></a>
+            <h1 class="event_title" style="font-size: 1.5rem; text-align: right;">{{ event.pub_date }}</h1>
+        </div>
+        <p>{{ event.event_description|safe }}</p>
+        <div>
+            {% for tag in event.tags.all %}
+                <a href="" type="button" class="btn shadow-none" style="background: #386C5F; margin: 0; margin-top: 1rem;">{{ tag.name }}</a>
+            {% endfor %}
+        </div>
+        <div id="profile_edit_box" style="width: 162%;">
+            <p style="margin-top: 1rem;"> Опубликовано пользователем: {{ event.author }} </p>
+            <a href="{{ event.get_edit_url }}"><img class="image_icon" src="{% static 'Diary/images/edit_white_48dp.svg' %}" alt=""></a>
+            <a href="{{ event.get_edit_url }}"><img class="image_icon" src="{% static 'Diary/images/delete_white_48dp.svg' %}" alt=""></a>
+        </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

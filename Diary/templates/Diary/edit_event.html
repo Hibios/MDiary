@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include "Diary/app_header.html" %}
+    <title>Редактирование события</title>
+</head>
+<body>
+{% include "Diary/navbar.html" %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div id="profile_flex">
+        <div id="profile_photo_box">
+            {% if event_image_form %}
+                <img class="profile_photo" src="{% static 'Diary/images/add_white_48dp.svg' %}" alt="">
+                {{ event_image_form.event_photo }}
+            {% else %}
+                <img class="profile_photo" src="{% static 'Diary/images/add_white_48dp.svg' %}" alt="">
+                {{ event_form.event_photo }}
+            {% endif %}
+        </div>
+        <div id="user_data" style="height:auto; padding: 0;">
+            <div class="form-group">
+                {{ event_form.event_title }}
+            </div>
+            <div class="form-group">
+                {{ event_form.event_description }}
+            </div>
+            <div class="form-group">
+                {{ event_form.author }}
+            </div>
+            <div class="form-group">
+                {{ event_form.tags }}
+            </div>
+        </div>
+    </div>
+<button type="submit" class="btn shadow-none" style="float: right;">Сохранить</button>
+</form>
+</body>
+</html>

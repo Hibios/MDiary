@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include "Diary/app_header.html" %}
+    <title>MDiary</title>
+</head>
+<body>
+{% include "Diary/navbar.html" %}
+<div id="profile_flex">
+    <div id="profile_photo_box">
+        {% if user.profile.profile_photo %}
+            <img class="profile_photo" src='{{ user.profile.profile_photo }}' alt="">
+        {% else %}
+            <img class="profile_photo" src='static/Diary/images/account_circle_white_48dp.svg' alt="">
+        {% endif %}
+    </div>
+    <div id="user_data">
+        <div id="profile_edit_box">
+            <h1 id="user_nickname">{{ user.get_username }}</h1>
+            <a href="{% url 'Diary:edit_profile' %}"><img class="image_icon" src="{% static 'Diary/images/edit_white_48dp.svg' %}" alt=""></a>
+        </div>
+        <p>{{ user.get_full_name }}</p>
+        <p>{{ user.email }}</p>
+    </div>
+</div>
+{% if user.is_authenticated %}
+<a href="{% url 'Diary:logout'%}?next={{request.path}}" type="button" class="btn shadow-none">Выйти</a>
+{% endif %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

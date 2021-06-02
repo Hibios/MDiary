@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include "Diary/app_header.html" %}
+    <title>Редактирование профиля</title>
+</head>
+<body>
+{% include "Diary/navbar.html" %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div id="profile_flex">
+        <div id="profile_photo_box">
+            <img class="profile_photo" src="{% static 'Diary/images/add_white_48dp.svg' %}" alt="">
+            {{ image_form.profile_photo }}
+        </div>
+        <div id="user_data" style="height:auto; padding: 0;">
+            {% for field in user_form %}
+                <div class="form-group">
+                    {{ field }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+<button type="submit" class="btn shadow-none" style="float: right;">Сохранить</button>
+</form>
+</body>
+</html>

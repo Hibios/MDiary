@@ -1,0 +1,32 @@
+{% block content %}
+    {% if events %}
+        {% for event in events %}
+        <div id="event_container">
+            <div id="event_content">
+                <div class="event_title_box">
+                    <a href="{{ event.get_absolute_url }}" style="text-decoration: none;"><h1 class="event_title">{{ event.event_title }}</h1></a>
+                    <h1 class="event_title" style="font-size: 1.5rem; text-align: right;">{{ event.pub_date }}</h1>
+                </div>
+                <p style="width: 110%;">{{ event.event_description|truncatechars:90|safe }}</p>
+                <div>
+                    {% for tag in event.tags.all %}
+                        <a href="" type="button" class="btn shadow-none" style="background: #386C5F; margin: 0; margin-top: 1rem;">{{ tag.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="event_image" style="background-image: url({{ event.event_photo }});">
+                <div id="triangle-topleft"></div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+    <p style="font-size: 24px; color: #3C3C3C; margin: 1rem;">События не найдены</p>
+    {% endif %}
+    <div style="padding: 1rem;">
+        <a href="{% url 'Diary:add_event' %}" type="button" class="btn shadow-none" style="margin: 0;">Добавить событие</a>
+    </div>
+    {% include "Diary/pagination.html" with page=events %}
+{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

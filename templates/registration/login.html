@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include "Diary/app_header.html" %}
+    <title>Вход</title>
+</head>
+<body>
+{% if form.errors %}
+  <script>alert("Вы ввели неверные данные, повторите попытку.")</script>
+{% elif request.path != "" %}
+    {% if user.is_authenticated %}
+    <script>alert("У вас нет доступа к этой странице.")</script>
+    {% endif %}
+{% endif %}
+
+<form method="post">
+{% csrf_token %}
+<div id="login_container">
+    <div id="login_form">
+        <div id="login_form_header">
+            <div style="display: flex; justify-content: center;">
+                <img src="{% static 'Diary/images/cottage_white_24dp.svg' %}" style="margin-bottom: 1rem;" alt="">
+                <h1 id="header_text">MDiary</h1>
+            </div>
+            <h5 style="color:white;">Вход</h5>
+        </div>
+        {% for field in form %}
+        <div class="form-group">
+            {{ field }}
+        </div>
+        {% endfor %}
+        <div style="padding-left: 1rem; padding-right: 1rem;">
+            <input type="submit" class="btn btn-primary shadow-none w-100"
+                   style="margin-left: 0; margin-right: 0;" value="Войти"/>
+        </div>
+        <div id="login_form_footer">
+            <p style="font-size: 12px;"><a href="{% url 'Diary:password_reset' %}" style="color:inherit;">Восстановить пароль</a></p>
+            <p style="font-size: 12px;"><a href="{% url 'Diary:register' %}" style="color:inherit;">Зарегистрироваться</a></p>
+        </div>
+    </div>
+</div>
+</form>
+</body>
+</html>

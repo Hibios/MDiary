@@ -1,0 +1,29 @@
+{% load static %}
+<div id="main_navbar">
+    <h1 id="header_text">MDiary</h1>
+    <div id="navbar_list">
+        <div class="topnav">
+            <a href="{% url 'Diary:events' %}">События</a>
+            <a href="#galery">Галерея</a>
+            <a href="#friends">Друзья</a>
+        </div>
+        {% if search_form %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <img class="input-group-text" src="{% static 'Diary/images/search_white_48dp.svg' %}" alt="">
+                {{ search_form.search_text }}
+            </div>
+        </form>
+        {% endif %}
+        {% if user.profile.profile_photo %}
+        <div class="circular">
+            <a href="{% url 'Diary:profile' %}"><img src='/{{ user.profile.profile_photo }}' alt="" /></a>
+        </div>
+        {% else %}
+        <div class="circular">
+            <a href="{% url 'Diary:profile' %}"><img src='static/Diary/images/account_circle_white_48dp.svg' alt="" /></a>
+        </div>
+        {% endif %}
+    </div>
+</div>

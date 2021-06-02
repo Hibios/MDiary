@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include "Diary/app_header.html" %}
+    <title>{% block title %}События{% endblock %}</title>
+</head>
+<body>
+{% include "Diary/navbar.html" %}
+<div id="content">
+  {% include "Diary/events_list.html" %}
+</div>
+</body>
+</html>
